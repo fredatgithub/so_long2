@@ -6,7 +6,7 @@
 /*   By: mtellami <mtellami@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 16:46:36 by mtellami          #+#    #+#             */
-/*   Updated: 2022/11/16 16:39:57 by mtellami         ###   ########.fr       */
+/*   Updated: 2022/11/20 08:21:07 by mtellami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,34 +34,18 @@ int map_elements(char **map)
 	return (1);
 }
 
-int	chars_count(char **map, char c)
-{
-	int i;
-	int	j;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while (map[i])
-	{
-		j = 0;
-		while(map[i][j])
-		{
-			if (map[i][j] == c)
-				count++;
-			j++;
-		}
-		i++;
-	}
-	return (count);
-}
-
 int	validate_content(char **map)
 {	
 	if (!map_elements(map))
+	{
+		invalid_map_element_error();
 		return (0);
-	if (chars_count(map, 'P') != 1 || chars_count(map, 'E') != 1
-		|| chars_count(map, 'C') < 1)
+	}
+	if (element_count(map, 'P') != 1 || element_count(map, 'E') != 1
+		|| element_count(map, 'C') < 1)
+	{
+		missing_map_element_error();
 		return (0);
+	}
 	return (1);
 }

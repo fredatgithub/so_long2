@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_memory.c                                      :+:      :+:    :+:   */
+/*   ft_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtellami <mtellami@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/16 17:13:53 by mtellami          #+#    #+#             */
-/*   Updated: 2022/11/16 17:17:35 by mtellami         ###   ########.fr       */
+/*   Created: 2022/11/20 15:02:12 by mtellami          #+#    #+#             */
+/*   Updated: 2022/11/20 15:02:39 by mtellami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	free_memory(char **map)
+void	ft_swap(char *a, char *b)
 {
-	int i;
+	char	tmp;
 
-	i = 0;
-	while (map[i])
-	{
-		free(map[i]);
-		map[i] = NULL;
-		i++;
-	}
-	free(map);
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
 }

@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   get_textures.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtellami <mtellami@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/15 15:17:37 by mtellami          #+#    #+#             */
-/*   Updated: 2022/11/20 16:15:07 by mtellami         ###   ########.fr       */
+/*   Created: 2022/11/20 09:18:13 by mtellami          #+#    #+#             */
+/*   Updated: 2022/11/20 09:18:29 by mtellami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <string.h>
 
-int main(int ac, char **av)
+char	*get_textures_path(char c)
 {
-	t_game	*so_long;
-	t_map	*map;
+	char	*path;
 
-	if (ac != 2)
-	{
-		invalid_number_of_argument();
-		return (0);
-	}
-	map = map_render(av[1]);
-	if(!map)
-	{
-		fail_rendering_map();
-		return (0);
-	}
-	so_long = setting_up(map);
-	display(so_long);
-	mlx_key_hook(so_long->win, &event, so_long);
-	mlx_loop(so_long->mlx);
+	path = NULL;
+	if (c == '0')
+		path = "textures/empty.xpm";
+	else if (c == '1')
+		path = "textures/wall.xpm";
+	else if (c == 'P')
+		path = "textures/player.xpm";
+	else if (c == 'C')
+		path = "textures/collec.xpm";
+	else if (c == 'E')
+		path  = "textures/exit.xpm";
+	return (path);
 }

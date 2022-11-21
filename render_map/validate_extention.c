@@ -1,36 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   validate_extention.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtellami <mtellami@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/15 15:17:37 by mtellami          #+#    #+#             */
-/*   Updated: 2022/11/20 16:15:07 by mtellami         ###   ########.fr       */
+/*   Created: 2022/11/20 07:36:50 by mtellami          #+#    #+#             */
+/*   Updated: 2022/11/20 08:29:27 by mtellami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <string.h>
 
-int main(int ac, char **av)
+int	map_extention(char *str)
 {
-	t_game	*so_long;
-	t_map	*map;
-
-	if (ac != 2)
+	str += ft_strlen(str) - 4;
+	if (ft_strcmp(str, ".ber"))
 	{
-		invalid_number_of_argument();
+		extention_error();
 		return (0);
 	}
-	map = map_render(av[1]);
-	if(!map)
-	{
-		fail_rendering_map();
-		return (0);
-	}
-	so_long = setting_up(map);
-	display(so_long);
-	mlx_key_hook(so_long->win, &event, so_long);
-	mlx_loop(so_long->mlx);
+	return (1);
 }

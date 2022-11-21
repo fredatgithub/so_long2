@@ -1,36 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   map_render.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtellami <mtellami@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/15 15:17:37 by mtellami          #+#    #+#             */
-/*   Updated: 2022/11/20 16:15:07 by mtellami         ###   ########.fr       */
+/*   Created: 2022/11/20 05:33:20 by mtellami          #+#    #+#             */
+/*   Updated: 2022/11/20 08:58:26 by mtellami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <string.h>
 
-int main(int ac, char **av)
+int	map_colum(char **map)
 {
-	t_game	*so_long;
-	t_map	*map;
+	int	i;
 
-	if (ac != 2)
-	{
-		invalid_number_of_argument();
-		return (0);
-	}
-	map = map_render(av[1]);
-	if(!map)
-	{
-		fail_rendering_map();
-		return (0);
-	}
-	so_long = setting_up(map);
-	display(so_long);
-	mlx_key_hook(so_long->win, &event, so_long);
-	mlx_loop(so_long->mlx);
+	i = 0;
+	while (map[i])
+		i++;
+	return (i);
+}
+
+t_map	*map_render(char	*path)
+{
+	t_map	*land;
+
+	land = malloc(sizeof(t_map));
+	if(!land)
+		return (NULL);
+	land->map = map_validate(path);
+	land->x = map_colum(land->map);
+	land->y = ft_strlen(land->map[0]);
+	land->c = element_count(land->map, 'C');
+	land->player = element_position(land->map, 'P');
+	return (land);
 }

@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   duplicate_map.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtellami <mtellami@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/15 15:17:37 by mtellami          #+#    #+#             */
-/*   Updated: 2022/11/20 16:15:07 by mtellami         ###   ########.fr       */
+/*   Created: 2022/11/20 10:43:41 by mtellami          #+#    #+#             */
+/*   Updated: 2022/11/20 10:49:52 by mtellami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <string.h>
 
-int main(int ac, char **av)
+char	**duplicate_map(char **map)
 {
-	t_game	*so_long;
-	t_map	*map;
+	char	**dup;
+	int	i;
 
-	if (ac != 2)
+	i = 0;
+	while (map[i])
+		i++;
+	dup = malloc(sizeof(char *) * (i + 1));
+	if (!dup)
+		return (NULL);
+	i = 0;
+	while (map[i])
 	{
-		invalid_number_of_argument();
-		return (0);
+		dup[i] = ft_strdup(map[i]);
+		i++;
 	}
-	map = map_render(av[1]);
-	if(!map)
-	{
-		fail_rendering_map();
-		return (0);
-	}
-	so_long = setting_up(map);
-	display(so_long);
-	mlx_key_hook(so_long->win, &event, so_long);
-	mlx_loop(so_long->mlx);
+	dup[i] = 0;
+	return (dup);
 }

@@ -1,36 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   event.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtellami <mtellami@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/15 15:17:37 by mtellami          #+#    #+#             */
-/*   Updated: 2022/11/20 16:15:07 by mtellami         ###   ########.fr       */
+/*   Created: 2022/11/20 16:08:19 by mtellami          #+#    #+#             */
+/*   Updated: 2022/11/20 19:03:10 by mtellami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <string.h>
 
-int main(int ac, char **av)
+int	event(int key, void	*param)
 {
-	t_game	*so_long;
-	t_map	*map;
+	t_game	*game;
 
-	if (ac != 2)
-	{
-		invalid_number_of_argument();
-		return (0);
-	}
-	map = map_render(av[1]);
-	if(!map)
-	{
-		fail_rendering_map();
-		return (0);
-	}
-	so_long = setting_up(map);
-	display(so_long);
-	mlx_key_hook(so_long->win, &event, so_long);
-	mlx_loop(so_long->mlx);
+	game = (t_game *)param;
+	if (key == 126)
+		up(game);
+	else if (key == 125)
+		down(game);
+	else if (key == 124)
+		right(game);
+	else if (key == 123)
+		left(game);
+	else if (key == 53)
+		exit(0);
+	mlx_clear_window(game->mlx, game->win);
+	display(game);
+	return (0);
 }

@@ -1,36 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   element_position.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtellami <mtellami@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/15 15:17:37 by mtellami          #+#    #+#             */
-/*   Updated: 2022/11/20 16:15:07 by mtellami         ###   ########.fr       */
+/*   Created: 2022/11/20 08:49:52 by mtellami          #+#    #+#             */
+/*   Updated: 2022/11/20 08:51:13 by mtellami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <string.h>
 
-int main(int ac, char **av)
+t_pos	*element_position(char **map, char c)
 {
-	t_game	*so_long;
-	t_map	*map;
+	t_pos	*p;
+	int	i;
+	int	j;
 
-	if (ac != 2)
+	p = malloc(sizeof(t_pos));
+	i = 0;
+	while (map[i])
 	{
-		invalid_number_of_argument();
-		return (0);
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == c)
+			{
+				p->x = i;
+				p->y = j;
+				return (p);
+			}
+			j++;
+		}
+		i++;
 	}
-	map = map_render(av[1]);
-	if(!map)
-	{
-		fail_rendering_map();
-		return (0);
-	}
-	so_long = setting_up(map);
-	display(so_long);
-	mlx_key_hook(so_long->win, &event, so_long);
-	mlx_loop(so_long->mlx);
+	return (NULL);
 }

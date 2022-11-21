@@ -6,7 +6,7 @@
 /*   By: mtellami <mtellami@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:47:53 by mtellami          #+#    #+#             */
-/*   Updated: 2022/11/16 15:48:21 by mtellami         ###   ########.fr       */
+/*   Updated: 2022/11/17 16:48:55 by mtellami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_tabsize(const char *str, char c)
 	size = 0;
 	while (*str)
 	{
-		while (*str && *str == c)
+		if (*str && *str == c)
 			str++;
 		if (*str)
 			size++;
@@ -77,7 +77,7 @@ char	**ft_split(char const *s, char c)
 	i = 0;
 	while (*s)
 	{
-		while (*s && *s == c)
+		if (*s && *s == c)
 			s++;
 		if (*s)
 		{
