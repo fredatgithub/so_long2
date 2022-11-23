@@ -6,7 +6,7 @@
 /*   By: mtellami <mtellami@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 08:26:29 by mtellami          #+#    #+#             */
-/*   Updated: 2022/11/20 08:07:42 by mtellami         ###   ########.fr       */
+/*   Updated: 2022/11/21 18:25:14 by mtellami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*reading(int fd)
 {
 	char	*map;
 	char	*buffer;
-	int	i;
+	int		i;
 
 	buffer = malloc(sizeof(char) * 11);
 	if (!buffer)
@@ -38,29 +38,14 @@ char	*reading(int fd)
 	return (map);
 }
 
-char	**read_map(char *map_path)
+char	**get_map(char *str)
 {
 	char	**map;
-	char	*str;
-	int		fd;
-	
-	fd = open(map_path, O_RDONLY);
-	if (fd == -1)
-	{
-		open_fail_error();
-		return (NULL);
-	}
-	str = reading(fd);
-	if (!str)
-	{
-		read_fail_error();
-		return (NULL);
-	}
-	close(fd);
+
 	if (str[0] == '\n' || str[ft_strlen(str) - 1] == '\n')
 	{
-		map_shape_error();
-		return(NULL);
+		map_errors(3);
+		return (NULL);
 	}
 	map = ft_split(str, '\n');
 	if (!map)
@@ -68,6 +53,31 @@ char	**read_map(char *map_path)
 		free(str);
 		return (NULL);
 	}
+	return (map);
+}
+
+char	**read_map(char *map_path)
+{
+	char	**map;
+	char	*str;
+	int		fd;
+
+	fd = open(map_path, O_RDONLY);
+	if (fd == -1)
+	{
+		function_error(2);
+		return (NULL);
+	}
+	str = reading(fd);
+	if (!str)
+	{
+		function_error(4);
+		return (NULL);
+	}
+	close(fd);
+	map = get_map(str);
+	if (!map)
+		return (NULL);
 	free(str);
 	return (map);
 }

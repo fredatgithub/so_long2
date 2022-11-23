@@ -6,7 +6,7 @@
 /*   By: mtellami <mtellami@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 17:03:51 by mtellami          #+#    #+#             */
-/*   Updated: 2022/11/20 08:27:23 by mtellami         ###   ########.fr       */
+/*   Updated: 2022/11/21 13:47:05 by mtellami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ int	is_closed(char **map)
 	{
 		if (map[i][0] != '1' || map[i][ft_strlen(map[i]) - 1] != '1')
 		{
-			non_closed_map_error();
+			map_errors(3);
 			return (0);
 		}
 		i++;
 	}
 	if (!check_top_bottom(map[0]) || !check_top_bottom(map[i - 1]))
 	{
-		non_closed_map_error();
+		map_errors(3);
 		return (0);
 	}
 	return (1);
@@ -58,7 +58,7 @@ int	is_rectangle(char **map)
 	{
 		if (ft_strlen(map[i]) != width)
 		{
-			non_rectangle_map_error();
+			map_errors(3);
 			return (0);
 		}
 		i++;

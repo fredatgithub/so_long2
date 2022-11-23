@@ -6,15 +6,15 @@
 /*   By: mtellami <mtellami@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 16:46:36 by mtellami          #+#    #+#             */
-/*   Updated: 2022/11/20 08:21:07 by mtellami         ###   ########.fr       */
+/*   Updated: 2022/11/21 17:51:33 by mtellami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int map_elements(char **map)
+int	map_elements(char **map)
 {
-	int i;
+	int	i;
 	int	j;
 
 	i = 0;
@@ -36,15 +36,10 @@ int map_elements(char **map)
 
 int	validate_content(char **map)
 {	
-	if (!map_elements(map))
+	if (!map_elements(map) || element_count(map, 'P') != 1
+		|| element_count(map, 'E') != 1 || element_count(map, 'C') < 1)
 	{
-		invalid_map_element_error();
-		return (0);
-	}
-	if (element_count(map, 'P') != 1 || element_count(map, 'E') != 1
-		|| element_count(map, 'C') < 1)
-	{
-		missing_map_element_error();
+		map_errors(2);
 		return (0);
 	}
 	return (1);

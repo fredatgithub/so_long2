@@ -6,7 +6,7 @@
 /*   By: mtellami <mtellami@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 07:36:50 by mtellami          #+#    #+#             */
-/*   Updated: 2022/11/20 08:29:27 by mtellami         ###   ########.fr       */
+/*   Updated: 2022/11/21 13:45:50 by mtellami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	map_extention(char *str)
 	str += ft_strlen(str) - 4;
 	if (ft_strcmp(str, ".ber"))
 	{
-		extention_error();
+		map_errors(1);
 		return (0);
 	}
 	return (1);
