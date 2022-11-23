@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   textures_path.c                                    :+:      :+:    :+:   */
+/*   free_exit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtellami <mtellami@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/20 09:18:13 by mtellami          #+#    #+#             */
-/*   Updated: 2022/11/22 08:34:35 by mtellami         ###   ########.fr       */
+/*   Created: 2022/11/21 10:51:46 by mtellami          #+#    #+#             */
+/*   Updated: 2022/11/23 18:54:31 by mtellami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-char	*textures_path(char c)
+int	free_exit(void *param)
 {
-	char	*path;
+	t_game	*game;
 
-	path = NULL;
-	if (c == '0')
-		path = "textures/empty.xpm";
-	else if (c == '1')
-		path = "textures/wall.xpm";
-	else if (c == 'P')
-		path = "textures/player.xpm";
-	else if (c == 'C')
-		path = "textures/collec.xpm";
-	else if (c == 'E')
-		path = "textures/exit.xpm";
-	return (path);
+	game = (t_game *)param;
+	free(game->map->player);
+	free_map(game->map->map);
+	free(game->map);
+	free(game);
+	exit(0);
+	return (1);
 }

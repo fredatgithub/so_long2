@@ -6,7 +6,7 @@
 /*   By: mtellami <mtellami@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 18:43:26 by mtellami          #+#    #+#             */
-/*   Updated: 2022/11/23 11:40:25 by mtellami         ###   ########.fr       */
+/*   Updated: 2022/11/23 17:09:16 by mtellami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,12 @@ typedef struct s_game
 	int		size;
 	int		moves;
 	t_map	*map;
+	int		*place;
 }	t_game;
 
 /* ------------ Map Render ------------ */
 /*---- utils ----*/
-t_pos	**positions_bonus(char **map, char c);
+t_pos	**positions(char **map, char c);
 t_pos	*element_position(char **map, char c);
 void	free_map(char **map);
 char	**duplicate_map(char **map);

@@ -1,24 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validate_extention.c                               :+:      :+:    :+:   */
+/*   event.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtellami <mtellami@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/20 07:36:50 by mtellami          #+#    #+#             */
-/*   Updated: 2022/11/22 09:35:14 by mtellami         ###   ########.fr       */
+/*   Created: 2022/11/20 16:08:19 by mtellami          #+#    #+#             */
+/*   Updated: 2022/11/23 18:56:07 by mtellami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long_bonus.h"
+#include "so_long.h"
 
-int	map_extention(char *str)
+int	event(int key, void	*param)
 {
-	str += ft_strlen(str) - 4;
-	if (ft_strcmp(str, ".ber"))
-	{
-		map_errors(1);
-		return (0);
-	}
-	return (1);
+	t_game	*game;
+
+	game = (t_game *)param;
+	if (key == 126)
+		up(game);
+	else if (key == 125)
+		down(game);
+	else if (key == 124)
+		right(game);
+	else if (key == 123)
+		left(game);
+	else if (key == 53)
+		free_exit(game);
+	mlx_clear_window(game->mlx, game->win);
+	display(game);
+	return (0);
 }

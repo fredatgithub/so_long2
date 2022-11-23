@@ -1,33 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   event.c                                            :+:      :+:    :+:   */
+/*   free_exit_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtellami <mtellami@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/20 16:08:19 by mtellami          #+#    #+#             */
-/*   Updated: 2022/11/21 16:22:10 by mtellami         ###   ########.fr       */
+/*   Created: 2022/11/21 10:51:46 by mtellami          #+#    #+#             */
+/*   Updated: 2022/11/23 15:10:53 by mtellami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
-int	event(int key, void	*param)
+void	free_enemy(t_pos **enemy)
+{
+	int	i;
+
+	i = 0;
+	while (enemy[i])
+	{
+		free(enemy[i]);
+		i++;
+	}
+	free(enemy);
+}
+
+int	free_exit_bonus(void *param)
 {
 	t_game	*game;
 
 	game = (t_game *)param;
-	if (key == 126)
-		up(game);
-	else if (key == 125)
-		down(game);
-	else if (key == 124)
-		right(game);
-	else if (key == 123)
-		left(game);
-	else if (key == 53)
-		exit(0);
-	mlx_clear_window(game->mlx, game->win);
-	display(game);
-	return (0);
+	free(game->map->player);
+	free_map(game->map->map);
+	free_enemy(game->map->enemy);
+	free(game->map);
+	free(game->place);
+	free(game);
+	exit(0);
+	return (1);
 }

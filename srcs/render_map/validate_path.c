@@ -6,11 +6,11 @@
 /*   By: mtellami <mtellami@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 08:09:42 by mtellami          #+#    #+#             */
-/*   Updated: 2022/11/22 12:02:21 by mtellami         ###   ########.fr       */
+/*   Updated: 2022/11/23 17:07:18 by mtellami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long_bonus.h"
+#include "so_long.h"
 
 int	check_valid_path(char **map, int x, int y, t_pos *end)
 {
@@ -89,7 +89,7 @@ int	validate_path(char **map)
 		return (0);
 	}
 	free_map(dup);
-	c = positions_bonus(map, 'C');
+	c = positions(map, 'C');
 	if (!collec_valide_path(c, p->x, p->y, map))
 	{
 		free_pos(c, p, e);

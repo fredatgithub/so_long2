@@ -1,46 +1,53 @@
 NAME = so_long
 BONUS = so_long_bonus
-CFLAGS = -Wall -Wextra -Werror -I .
+CFLAGS = -Wall -Wextra -Werror -I includes/
+MLX = -Lmlx -lmlx -framework OpenGL -framework AppKit
 
-SRCS = libft/ft_putstr.c libft/ft_strcmp.c libft/ft_strjoin.c \
-	   libft/ft_strlen.c libft/ft_split.c libft/ft_strdup.c \
-	   libft/ft_putnbr.c srcs/so_long.c \
-	   render_map/utils/element_count.c render_map/utils/element_position.c render_map/utils/free_memory.c \
-	   render_map/map_render.c render_map/map_validate.c render_map/read_map.c \
-	   render_map/validate_content.c render_map/validate_extention.c render_map/validate_path.c \
-	   render_map/validate_shape.c srcs/display.c srcs/setting_up.c srcs/textures_path.c \
-	   render_map/utils/duplicate_map.c moves/up.c srcs/event.c moves/down.c  moves/left.c moves/right.c \
-	   moves/ft_swap.c render_map/utils/collectibles_position.c srcs/free_exit.c \
-	   errors/function_errors.c errors/map_errors.c \
+LIBFT = libft/ft_putstr.c libft/ft_strcmp.c libft/ft_strjoin.c libft/ft_strlen.c \
+		libft/ft_split.c libft/ft_strdup.c libft/ft_putnbr.c libft/ft_itoa.c \
 
-B_SRCS = libft/ft_putstr.c libft/ft_strcmp.c libft/ft_strjoin.c \
-	   libft/ft_strlen.c libft/ft_split.c libft/ft_strdup.c libft/ft_itoa.c \
-	   libft/ft_putnbr.c bonus/srcs/so_long_bonus.c \
-	   bonus/render_map/utils/element_count.c bonus/render_map/utils/element_position.c \
-	   bonus/render_map/utils/free_memory.c \
-	   bonus/render_map/map_render_bonus.c bonus/render_map/map_validate.c bonus/render_map/read_map.c \
-	   bonus/render_map/validate_content.c bonus/render_map/validate_extention.c \
-	   bonus/render_map/validate_path.c \
-	   bonus/render_map/validate_shape.c bonus/srcs/display_bonus.c bonus/srcs/setting_up_bonus.c \
-	   bonus/srcs/textures_path_bonus.c bonus/render_map/utils/duplicate_map.c \
-	   bonus/moves/up_bonus.c bonus/srcs/event_bonus.c bonus/moves/down_bonus.c bonus/moves/left_bonus.c \
-	   bonus/moves/right_bonus.c bonus/moves/ft_swap.c bonus/render_map/utils/positions_bonus.c \
-	   bonus/srcs/free_exit_bonus.c errors/function_errors.c errors/map_errors.c bonus/srcs/enemy_patrol.c\
+SRCS = srcs/functions/so_long.c \
+	   srcs/utils/element_count.c srcs/utils/element_position.c srcs/utils/free_memory.c \
+	   srcs/render_map/map_render.c srcs/render_map/map_validate.c srcs/render_map/read_map.c \
+	   srcs/render_map/validate_content.c srcs/render_map/validate_extention.c \
+	   srcs/render_map/validate_path.c srcs/render_map/validate_shape.c srcs/functions/display.c \
+	   srcs/functions/setting_up.c srcs/functions/textures_path.c srcs/utils/duplicate_map.c \
+	   srcs/moves/up.c srcs/functions/event.c srcs/moves/down.c srcs/moves/left.c srcs/moves/right.c \
+	   srcs/moves/ft_swap.c srcs/utils/positions.c srcs/functions/free_exit.c \
+	   srcs/errors/function_errors.c srcs/errors/map_errors.c \
+
+B_SRCS = bonus/functions/so_long_bonus.c \
+	   srcs/utils/element_count.c srcs/utils/element_position.c srcs/utils/free_memory.c \
+	   bonus/render_map/map_render_bonus.c srcs/render_map/map_validate.c srcs/render_map/read_map.c \
+	   bonus/render_map/validate_content.c srcs/render_map/validate_extention.c \
+	   srcs/render_map/validate_path.c srcs/utils/positions.c srcs/render_map/validate_shape.c \
+	   bonus/functions/display_bonus.c bonus/functions/setting_up_bonus.c \
+	   bonus/functions/textures_path_bonus.c srcs/utils/duplicate_map.c bonus/moves/up_bonus.c \
+	   bonus/functions/event_bonus.c bonus/moves/down_bonus.c bonus/moves/left_bonus.c \
+	   bonus/moves/right_bonus.c srcs/moves/ft_swap.c bonus/functions/free_exit_bonus.c \
+	   srcs/errors/function_errors.c srcs/errors/map_errors.c bonus/functions/enemy_patrol.c\
 	   bonus/player_sprite/player_dir_1.c bonus/player_sprite/player_dir_2.c \
+
+O_LIBFT = $(LIBFT:.c=.o)
+
+OBJS = $(SRCS:.c=.o)
+
+B_OBJS = $(B_SRCS:.c=.o)
 
 all : $(NAME)
 
-$(NAME) : 
-		cc $(CFLAGS) $(SRCS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+$(NAME) : $(O_LIBFT) $(OBJS)
+		cc $(CFLAGS) $(O_LIBFT) $(OBJS) $(MLX) -o $(NAME)
 
-bonus : $(BONUS)
+bonus : all $(BONUS)
 
-$(BONUS) :
-		cc $(CFLAGS) $(B_SRCS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(BONUS)
+$(BONUS) : $(O_LIBFT) $(B_OBJS)
+		cc $(CFLAGS) $(O_LIBFT) $(B_OBJS) $(MLX) -o $(BONUS)
 
 clean : 
-		rm -fr $(NAME) $(BONUS)
+		rm -fr $(O_LIBFT) $(OBJS) $(B_OBJS)
 
 fclean : clean
+		rm -fr $(NAME) $(BONUS)
 
-re : clean bonus
+re : clean all

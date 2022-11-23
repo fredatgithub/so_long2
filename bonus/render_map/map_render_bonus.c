@@ -6,7 +6,7 @@
 /*   By: mtellami <mtellami@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 05:33:20 by mtellami          #+#    #+#             */
-/*   Updated: 2022/11/22 18:58:58 by mtellami         ###   ########.fr       */
+/*   Updated: 2022/11/23 17:02:23 by mtellami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_map	*map_render_bonus(char	*path)
 	map->y = ft_strlen(map->map[0]);
 	map->c = element_count(map->map, 'C');
 	map->player = element_position(map->map, 'P');
-	map->enemy = positions_bonus(map->map, 'X');
+	map->enemy = positions(map->map, 'X');
 	map->dir = 'd';
 	return (map);
 }

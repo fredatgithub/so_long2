@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   positions_bonus.c                                  :+:      :+:    :+:   */
+/*   positions.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtellami <mtellami@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 08:55:25 by mtellami          #+#    #+#             */
-/*   Updated: 2022/11/22 12:12:15 by mtellami         ###   ########.fr       */
+/*   Updated: 2022/11/23 17:01:21 by mtellami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	get_position(t_pos **elem, char **map, char c)
 	}
 }
 
-t_pos	**positions_bonus(char **map, char c)
+t_pos	**positions(char **map, char c)
 {
 	t_pos	**elem;
 	int		count;
