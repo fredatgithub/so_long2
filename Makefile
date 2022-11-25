@@ -1,7 +1,7 @@
 NAME = so_long
 BONUS = so_long_bonus
 CFLAGS = -Wall -Wextra -Werror -I includes/
-MLX = -Lmlx -lmlx -framework OpenGL -framework AppKit
+MLX =  -lmlx -framework OpenGL -framework AppKit
 
 LIBFT = libft/ft_putstr.c libft/ft_strcmp.c libft/ft_strjoin.c libft/ft_strlen.c \
 		libft/ft_split.c libft/ft_strdup.c libft/ft_putnbr.c libft/ft_itoa.c \
