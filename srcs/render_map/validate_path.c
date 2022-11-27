@@ -14,7 +14,7 @@
 
 int	check_valid_path(char **map, int x, int y, t_pos *end)
 {
-	if (map[x][y] == '1')
+	if (map[x][y] == '1' || map[x][y] == 'E')
 		return (0);
 	if (x == end->x && y == end->y)
 		return (1);
